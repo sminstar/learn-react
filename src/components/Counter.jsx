@@ -14,7 +14,7 @@ const MIN = -200;
     // setCount(count + 1);
     onClickIncrease();
     if(count >= MAX) return;
-    setCount(num1 => num1+step);    
+    setCount(num1 => num1+step);
     // console.log("🚀 ~ handleIncrease ~ count++;:", count);
   }
  
@@ -28,33 +28,43 @@ const MIN = -200;
     setCount(num1 => num1<=MIN ? MIN : num1-step);
 
     // console.log("🚀 ~ handleDecrease ~ count--;:", count);
-  }  
+  } 
+  
+  const initNumber = () => {
+    setCount(0);
+  }
 
   const [startNum, setStartNum] = useState("");
 
   const handleChange = (e) => {
     setStartNum(e.target.value);
-    setCount(e.target.value);
+    setCount(parseInt(e.target.value));
   };
   //view
   return (
     <div>
       <h1>카운터</h1>
+      <span style={{marginRight:'10px'}}>시작번호 입력:</span>
       <input
-        type="text"
-        value={startNum}
-        onChange={handleChange}
-        placeholder="숫자를 입력하세요" 
-        style={{ width:'120px', height: '50px', fontSize: '15px' }}      
+        type="number"
+        value={startNum}        
+        onChange={handleChange}        
+        style={{ width:'50px', height: '30px', fontSize: '15px', marginRight: '20px', textAlign: 'center'}}      
       />
-      <h2>{count}</h2>      
+      <button 
+          type="button"
+          onClick={initNumber}>초기화
+        </button>
+      <h2>현재번호: {count}  증감단위: ({step})</h2>      
       <div>
         <button 
           type="button"
+          style={{ width:'50px', height: '30px'}}
           onClick={handleIncrease}>+{step}
         </button>
         <button 
           type="button"
+          style={{ width:'50px', height: '30px'}}
           onClick={handleDecrease}>-{step}
         </button>
       </div>
